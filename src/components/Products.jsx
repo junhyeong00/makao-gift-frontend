@@ -1,12 +1,13 @@
+import { Link } from 'react-router-dom';
 import useProductStore from '../hooks/useProductStore';
 
 import numberFormat from '../utils/numberFormat';
+import Pages from './Pages';
 
 export default function Products() {
   const productStore = useProductStore();
 
   const { products } = productStore;
-
   return (
     <div>
       <div>
@@ -17,23 +18,28 @@ export default function Products() {
           <p>마카오톡 선물하기에서만 볼 수 있는 특별템 기획전</p>
         </div>
       </div>
-      <div>
-        <p>인기선물을 한 자리에 모았어요</p>
+      <nav>
+        {products.length ? (
+          <p>인기선물을 한 자리에 모았어요</p>
+        ) : (
+          <p>상품이 존재하지 않습니다</p>
+        )}
         <ul>
           {products.map((product) => (
             <li key={product.id}>
-              <button type="button">
+              <Link to={`/products/${product.id}`}>
                 <p>{product.maker}</p>
                 <p>{product.name}</p>
                 <p>
                   {numberFormat(product.price)}
                   원
                 </p>
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
-      </div>
+      </nav>
+      <Pages />
     </div>
   );
 }

@@ -4,15 +4,27 @@ import { productStore } from '../stores/ProductStore';
 
 import Products from './Products';
 
-test('Products', async () => {
-  productStore.fetchProducts();
+jest.mock('react-router-dom', () => ({
+  // eslint-disable-next-line react/prop-types
+  Link({ children, to }) {
+    return (
+      <a href={to}>
+        {children}
+      </a>
+    );
+  },
+}));
 
-  render(<Products />);
+describe('Products', () => {
+  test('상품이 없을 때', async () => {
+    await productStore.fetchProducts(1);
+    render(<Products />);
 
-  screen.getByText('평범한 선물은 주기도 민망하다구요?');
+    screen.getByText('평범한 선물은 주기도 민망하다구요?');
 
-  await waitFor(() => {
-    screen.getByText('제조사 1');
-    screen.getByText('제조사 2');
+    await waitFor(() => {
+      screen.getByText('제조사 1');
+      screen.getByText('제조사 2');
+    });
   });
 });
