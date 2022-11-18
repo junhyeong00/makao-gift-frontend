@@ -34,6 +34,7 @@ export default function LoginPage() {
     <LoginForm
       register={register}
       handleSubmit={handleSubmit}
+      errors={errors}
       onSubmit={onSubmit}
       navigateToRegister={handleClickRegister}
     />
