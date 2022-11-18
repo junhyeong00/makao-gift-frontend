@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom';
-import useProductStore from '../hooks/useProductStore';
 
 import numberFormat from '../utils/numberFormat';
 import Pages from './Pages';
 
-export default function Products() {
-  const productStore = useProductStore();
-
-  const { products } = productStore;
+export default function Products({
+  products,
+}) {
   return (
     <div>
       <div>

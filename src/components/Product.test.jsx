@@ -1,44 +1,59 @@
 import {
-  fireEvent, render, screen, waitFor,
+  fireEvent, render, screen,
 } from '@testing-library/react';
-
-import { productStore } from '../stores/ProductStore';
 
 import Product from './Product';
 
-const context = describe;
-
-const handleAddCount = jest.fn();
-const handleReduceCount = jest.fn();
-
 describe('Product', () => {
-  render(<Product />);
+  const handleClickAddCount = jest.fn();
+  const handleClickMinusCount = jest.fn();
 
-  test('id 1번 상품 상세 정보 확인', async () => {
-    productStore.fetchProduct(1);
+  function renderProduct({
+    product, selectedCount, totalPrice,
+  }) {
+    render((
+      <Product
+        product={product}
+        selectedCount={selectedCount}
+        totalPrice={totalPrice}
+        onClickAddCount={handleClickAddCount}
+        onClickMinusCount={handleClickMinusCount}
+      />
+    ));
+  }
 
-    await waitFor(() => {
-      screen.getByText('제조사 1');
-      screen.getByText('상품 1');
-      screen.getByText('좋다');
-    });
+  const product = {
+    id: 1,
+    name: 'nike',
+    price: 1_000,
+    maker: 'maker',
+    description: 'good',
+  };
+
+  const selectedCount = 1;
+  const totalPrice = product.price * selectedCount;
+
+  it('renders product information', () => {
+    renderProduct({ product, selectedCount, totalPrice });
+
+    screen.getByText(/nike/);
+    screen.getAllByText(/1,000/);
+    screen.getByText(/maker/);
   });
 
-  test('+ 버튼을 누른 경우', () => {
-    it('개수가 2로 증가', async () => {
-      fireEvent.click(screen.getByText('+'));
+  it('listens for add count button click event', () => {
+    renderProduct({ product, selectedCount, totalPrice });
 
-      screen.getByText('2');
-      expect(handleAddCount).toBeCalled();
-    });
+    fireEvent.click(screen.getByText('+'));
+
+    expect(handleClickAddCount).toBeCalled();
   });
 
-  context('- 버튼을 누른 경우', () => {
-    it('개수가 변하지 않음', () => {
-      fireEvent.click(screen.getByText('-'));
+  it('listens for minus count button click event', () => {
+    renderProduct({ product, selectedCount, totalPrice });
 
-      screen.getByText('1');
-      expect(handleReduceCount).not.toBeCalled();
-    });
+    fireEvent.click(screen.getByText(/-/));
+
+    expect(handleClickMinusCount).not.toBeCalled();
   });
 });

@@ -5,6 +5,8 @@ import useProductStore from '../hooks/useProductStore';
 export default function ProductsPage() {
   const productStore = useProductStore();
 
+  const { products } = productStore;
+
   const page = productStore.currentPage || 1;
 
   useEffect(() => {
@@ -12,6 +14,8 @@ export default function ProductsPage() {
   }, []);
 
   return (
-    <Products />
+    <Products
+      products={products}
+    />
   );
 }

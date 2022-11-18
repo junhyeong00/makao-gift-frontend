@@ -18,7 +18,8 @@ Scenario('홈페이지 접속 - (로그인 전)', ({ I }) => {
 
 Scenario('홈페이지 접속 - (로그인 후)', ({ I }) => {
   // Given
-  I.setupDatabase();
+  I.setupUser();
+  I.login('test123');
 
   // When
   I.amOnPage('/');
@@ -31,6 +32,5 @@ Scenario('홈페이지 접속 - (로그인 후)', ({ I }) => {
   I.see('스토어');
   I.see('주문조회');
 
-  I.see('내 잔액: 50000원');
   I.see('로그아웃');
 });

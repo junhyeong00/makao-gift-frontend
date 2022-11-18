@@ -1,17 +1,15 @@
-import useProductStore from '../hooks/useProductStore';
 import numberFormat from '../utils/numberFormat';
 
-export default function Product() {
-  const productStore = useProductStore();
-
-  const { product, selectedCount, totalPrice } = productStore;
-
+export default function Product({
+  product, selectedCount, totalPrice,
+  onClickAddCount, onClickMinusCount,
+}) {
   const handleAddCount = () => {
-    productStore.addCount();
+    onClickAddCount();
   };
 
   const handleReduceCount = () => {
-    productStore.reduceCount();
+    onClickMinusCount();
   };
 
   return (

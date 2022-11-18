@@ -67,6 +67,20 @@ const server = setupServer(
       id: 1, maker: '제조사 1', name: '상품 1', price: 500, description: '좋다',
     },
   ))),
+
+  rest.post(`${baseUrl}/session`, async (req, res, ctx) => {
+    const { userName, password } = await req.json();
+
+    if (userName === 'test123' && password === 'Password1234!') {
+      return res(ctx.json({
+        accessToken: 'ACCESS.TOKEN',
+        name: '김토끼',
+        amount: 50_000,
+      }));
+    }
+
+    return res(context.status(400));
+  }),
 );
 
 export default server;

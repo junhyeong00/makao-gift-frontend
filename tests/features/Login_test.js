@@ -2,7 +2,7 @@ Feature('로그인 - 고객은 자신임을 증명하기 위해 로그인할 수
 
 // Given
 Before(({ I }) => {
-  I.setupDatabase();
+  I.setupUser();
 
   I.amOnPage('/');
   I.click('로그인');
@@ -17,7 +17,7 @@ Scenario('로그인 성공', ({ I }) => {
   I.click('로그인하기');
 
   // Then
-  I.see('특별한 아이템을 전하세요');
+  I.waitForText('아이템을 전하세요');
   I.see('내 잔액: 50,000원');
   I.see('로그아웃');
 });

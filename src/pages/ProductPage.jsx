@@ -16,7 +16,23 @@ export default function ProductPage() {
     productStore.fetchProduct(productId);
   }, []);
 
+  const { product, selectedCount, totalPrice } = productStore;
+
+  const handleClickAddCount = () => {
+    productStore.addCount();
+  };
+
+  const handleClickMinusCount = () => {
+    productStore.reduceCount();
+  };
+
   return (
-    <Product />
+    <Product
+      product={product}
+      selectedCount={selectedCount}
+      totalPrice={totalPrice}
+      onClickAddCount={handleClickAddCount}
+      onClickMinusCount={handleClickMinusCount}
+    />
   );
 }
