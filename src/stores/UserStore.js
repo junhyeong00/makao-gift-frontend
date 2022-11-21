@@ -10,6 +10,12 @@ export default class UserStore extends Store {
     this.amount = 0;
   }
 
+  async fetchUserAmount() {
+    const amount = await apiService.fetchUserAmount();
+    this.amount = amount;
+    this.publish();
+  }
+
   async login({ userName, password }) {
     try {
       const { accessToken, name, amount } = await apiService.postSession({

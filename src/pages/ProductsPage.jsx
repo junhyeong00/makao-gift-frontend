@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import Products from '../components/Products';
-import useProductStore from '../hooks/useProductStore';
+import useProductsStore from '../hooks/useProductsStore';
 
 export default function ProductsPage() {
-  const productStore = useProductStore();
+  const productsStore = useProductsStore();
 
-  const { products } = productStore;
+  const { products } = productsStore;
 
-  const page = productStore.currentPage || 1;
+  const page = productsStore.currentPage || 1;
 
   useEffect(() => {
-    productStore.fetchProducts(page);
+    productsStore.fetchProducts(page);
   }, []);
 
   return (

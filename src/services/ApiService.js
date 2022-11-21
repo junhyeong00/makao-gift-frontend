@@ -39,6 +39,42 @@ export default class ApiService {
 
     return { accessToken, name, amount };
   }
+
+  async order({
+    productId,
+    purchaseCount,
+    purchasePrice,
+    receiver,
+    address,
+    messageToSend,
+  }) {
+    const url = `${baseUrl}/order`;
+    const { data } = await axios.post(url, {
+      productId,
+      purchaseCount,
+      purchasePrice,
+      receiver,
+      address,
+      messageToSend,
+    }, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
+    console.log(data);
+
+    return data;
+  }
+
+  async fetchUserAmount() {
+    const url = `${baseUrl}/user/amount`;
+    const { data } = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
+    return data.amount;
+  }
 }
 
 export const apiService = new ApiService();

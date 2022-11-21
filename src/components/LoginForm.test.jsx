@@ -1,5 +1,5 @@
 import {
-  fireEvent, render, screen, waitFor,
+  fireEvent, render, screen,
 } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
@@ -10,9 +10,12 @@ const onSubmit = jest.fn();
 const handleClickRegister = jest.fn();
 
 test('LoginForm', async () => {
+  const errors = {};
+
   render(<LoginForm
     register={register}
     handleSubmit={handleSubmit}
+    errors={errors}
     onSubmit={onSubmit}
     navigateToRegister={handleClickRegister}
   />);

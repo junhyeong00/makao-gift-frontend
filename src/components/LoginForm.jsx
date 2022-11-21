@@ -4,7 +4,6 @@
 export default function LoginForm({
   register, handleSubmit, errors, onSubmit, navigateToRegister,
 }) {
-  console.log(errors);
   const handleClickRegister = () => {
     navigateToRegister('/signup');
   };

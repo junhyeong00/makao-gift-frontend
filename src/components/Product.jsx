@@ -2,7 +2,7 @@ import numberFormat from '../utils/numberFormat';
 
 export default function Product({
   product, selectedCount, totalPrice,
-  onClickAddCount, onClickMinusCount,
+  onClickAddCount, onClickMinusCount, onClickBuy,
 }) {
   const handleAddCount = () => {
     onClickAddCount();
@@ -10,6 +10,10 @@ export default function Product({
 
   const handleReduceCount = () => {
     onClickMinusCount();
+  };
+
+  const handleClickBuy = () => {
+    onClickBuy();
   };
 
   return (
@@ -50,7 +54,12 @@ export default function Product({
           원
         </span>
       </p>
-      <button type="button">선물하기</button>
+      <button
+        type="button"
+        onClick={handleClickBuy}
+      >
+        선물하기
+      </button>
     </div>
   );
 }

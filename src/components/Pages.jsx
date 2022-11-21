@@ -1,14 +1,14 @@
-import useProductStore from '../hooks/useProductStore';
+import useProductsStore from '../hooks/useProductsStore';
 
 export default function Pages() {
-  const productStore = useProductStore();
-  const { totalPageCount } = productStore;
+  const productsStore = useProductsStore();
+  const { totalPageCount } = productsStore;
 
   const pages = Array(totalPageCount).fill(0)
     .map((element, index) => index + 1);
 
   const handlePageClick = (page) => {
-    productStore.changePage(page);
+    productsStore.changePage(page);
   };
 
   return (
