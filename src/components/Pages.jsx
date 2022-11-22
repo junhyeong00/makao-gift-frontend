@@ -1,15 +1,8 @@
-import useProductsStore from '../hooks/useProductsStore';
-
-export default function Pages() {
-  const productsStore = useProductsStore();
-  const { totalPageCount } = productsStore;
-
+export default function Pages({
+  totalPageCount, handlePageClick,
+}) {
   const pages = Array(totalPageCount).fill(0)
     .map((element, index) => index + 1);
-
-  const handlePageClick = (page) => {
-    productsStore.changePage(page);
-  };
 
   return (
     <nav>

@@ -61,7 +61,6 @@ export default class ApiService {
         Authorization: `Bearer ${this.accessToken}`,
       },
     });
-    console.log(data);
 
     return data;
   }
@@ -74,6 +73,20 @@ export default class ApiService {
       },
     });
     return data.amount;
+  }
+
+  async fetchOrders(page) {
+    const url = `${baseUrl}/orders`;
+    const { data } = await axios.get(url, {
+      params: { page },
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
+    return {
+      orders: data.orders.content,
+      totalPageCount: data.totalPageCount,
+    };
   }
 }
 

@@ -4,7 +4,7 @@ import numberFormat from '../utils/numberFormat';
 import Pages from './Pages';
 
 export default function Products({
-  products,
+  products, totalPageCount, handlePageClick,
 }) {
   return (
     <div>
@@ -37,7 +37,10 @@ export default function Products({
           ))}
         </ul>
       </nav>
-      <Pages />
+      <Pages
+        totalPageCount={totalPageCount}
+        handlePageClick={handlePageClick}
+      />
     </div>
   );
 }
