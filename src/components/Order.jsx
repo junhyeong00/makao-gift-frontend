@@ -1,11 +1,13 @@
-import useOrderStore from '../hooks/useOrderStore';
+/* eslint-disable no-nested-ternary */
+
+import useOrderFormStore from '../hooks/useOrderFormStore';
 import numberFormat from '../utils/numberFormat';
 
 export default function Order({
   product, purchaseCount, purchasePrice, receiver, address, messageToSend,
   errors, onSubmit,
 }) {
-  const orderStore = useOrderStore();
+  const orderFormStore = useOrderFormStore();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -39,31 +41,41 @@ export default function Order({
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="input-receiver">
-            받는 분 성함
+            받는 분 성함*
           </label>
           <input
             id="input-receiver"
             type="text"
             value={receiver}
             onChange={(event) => (
-              orderStore.changeReceiver(event.target.value)
+              orderFormStore.changeReceiver(event.target.value)
             )}
           />
-          <p>3~7자까지 한글만 사용 가능</p>
+          <p>
+            { errors['2000']
+              ? errors['2000']
+              : errors['2002']
+                ? errors['2002']
+                : '3-7자까지 한글만 사용 가능'}
+          </p>
         </div>
         <div>
           <label htmlFor="input-address">
-            받는 분 주소
+            받는 분 주소*
           </label>
           <input
             id="input-address"
             type="text"
             value={address}
             onChange={(event) => (
-              orderStore.changeAddress(event.target.value)
+              orderFormStore.changeAddress(event.target.value)
             )}
           />
-          <p>주소지를 입력해주세요</p>
+          <p>
+            {errors['2001']
+              ? errors['2001']
+              : '주소지를 입력해주세요'}
+          </p>
         </div>
         <div>
           <label htmlFor="input-message">
@@ -74,7 +86,7 @@ export default function Order({
             type="text"
             value={messageToSend}
             onChange={(event) => (
-              orderStore.changeMessage(event.target.value)
+              orderFormStore.changeMessage(event.target.value)
             )}
           />
           <p>100글자 이내로 입력해주세요</p>

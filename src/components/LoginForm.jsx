@@ -2,13 +2,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 export default function LoginForm({
-  register, handleSubmit, errors, onSubmit, navigateToRegister,
+  register, handleSubmit, errors, onSubmit, navigateToRegister, loginError,
 }) {
   const handleClickRegister = () => {
     navigateToRegister('/signup');
   };
 
-  // TODO 아이디, 비번 틀렸을 시 에러처리 필요
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>USER LOGIN</h2>
@@ -37,7 +36,7 @@ export default function LoginForm({
           ? errors.userName.message
           : errors.password
             ? errors.password.message
-            : null}
+            : loginError || null}
       </p>
       <button type="submit">
         로그인하기

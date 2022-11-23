@@ -2,11 +2,15 @@ import { useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
+import { useLocalStorage } from 'usehooks-ts';
+
 import useOrdersStore from '../hooks/useOrdersStore';
 
 import Orders from '../components/Orders';
 
 export default function OrdersPage() {
+  const [accessToken] = useLocalStorage('accessToken', '');
+
   const navigate = useNavigate();
 
   const ordersStore = useOrdersStore();
@@ -16,17 +20,23 @@ export default function OrdersPage() {
   const currentPage = ordersStore.currentPage || 1;
 
   useEffect(() => {
-    ordersStore.fetchProducts(currentPage);
+    if (!accessToken) {
+      navigate('/login');
+    }
+
+    if (accessToken) {
+      ordersStore.fetchProducts(currentPage);
+    }
   }, []);
 
   const handlePageClick = (page) => {
     ordersStore.changePage(page);
   };
 
-  const handleClickOrderDetail = (transactionId) => {
-    navigate(`/orders/${transactionId}`, {
+  const handleClickOrderDetail = (orderId) => {
+    navigate(`/orders/${orderId}`, {
       state: {
-        orderId: transactionId,
+        orderId,
       },
     });
   };

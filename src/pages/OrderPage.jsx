@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useEffect } from 'react';
-import useOrderStore from '../hooks/useOrderStore';
+import useOrderFormStore from '../hooks/useOrderFormStore';
 import useUserStore from '../hooks/useUserStore';
 
 import Order from '../components/Order';
@@ -13,11 +13,11 @@ export default function OrderPage() {
 
   const { product, selectedCount: purchaseCount, totalPrice: purchasePrice } = location.state;
 
-  const orderStore = useOrderStore();
+  const orderFormStore = useOrderFormStore();
   const userStore = useUserStore();
 
   useEffect(() => {
-    orderStore.initialize({
+    orderFormStore.initialize({
       product,
       purchaseCount,
       purchasePrice,
@@ -26,10 +26,10 @@ export default function OrderPage() {
 
   const {
     receiver, address, messageToSend, errorMessages,
-  } = orderStore;
+  } = orderFormStore;
 
   const handleSubmit = async () => {
-    const { orderId } = await orderStore.order();
+    const { orderId } = await orderFormStore.order();
 
     if (orderId) {
       userStore.fetchUserAmount();

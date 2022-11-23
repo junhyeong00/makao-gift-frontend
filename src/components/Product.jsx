@@ -1,7 +1,7 @@
 import numberFormat from '../utils/numberFormat';
 
 export default function Product({
-  product, selectedCount, totalPrice,
+  product, selectedCount, totalPrice, canBuy,
   onClickAddCount, onClickMinusCount, onClickBuy,
 }) {
   const handleAddCount = () => {
@@ -60,6 +60,9 @@ export default function Product({
       >
         선물하기
       </button>
+      {!canBuy ? (
+        <p>잔액이 부족하여 선물하기가 불가합니다.</p>
+      ) : null}
     </div>
   );
 }

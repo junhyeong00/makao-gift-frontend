@@ -5,6 +5,7 @@ import { useLocalStorage } from 'usehooks-ts';
 import Product from '../components/Product';
 
 import useProductStore from '../hooks/useProductStore';
+import useUserStore from '../hooks/useUserStore';
 
 export default function ProductPage() {
   const [accessToken] = useLocalStorage('accessToken', '');
@@ -19,7 +20,12 @@ export default function ProductPage() {
     productStore.fetchProduct(productId);
   }, []);
 
-  const { product, selectedCount, totalPrice } = productStore;
+  const userStore = useUserStore();
+  const { amount } = userStore;
+
+  const {
+    product, selectedCount, totalPrice, canBuy,
+  } = productStore;
 
   const navigate = useNavigate();
 
@@ -36,6 +42,11 @@ export default function ProductPage() {
       navigate('/login');
     }
 
+    if (amount < totalPrice) {
+      productStore.discontinuePurchase();
+      return;
+    }
+
     if (accessToken) {
       navigate('/order', {
         state: { product, selectedCount, totalPrice },
@@ -48,6 +59,7 @@ export default function ProductPage() {
       product={product}
       selectedCount={selectedCount}
       totalPrice={totalPrice}
+      canBuy={canBuy}
       onClickAddCount={handleClickAddCount}
       onClickMinusCount={handleClickMinusCount}
       onClickBuy={onClickBuy}

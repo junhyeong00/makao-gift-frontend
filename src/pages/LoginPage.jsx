@@ -37,6 +37,7 @@ export default function LoginPage() {
       errors={errors}
       onSubmit={onSubmit}
       navigateToRegister={handleClickRegister}
+      loginError={userStore.loginError}
     />
   );
 }

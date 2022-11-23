@@ -8,6 +8,10 @@ export default class UserStore extends Store {
 
     this.name = '';
     this.amount = 0;
+
+    this.loginError = '';
+
+    this.signUpErrors = {};
   }
 
   async fetchUserAmount() {
@@ -26,7 +30,25 @@ export default class UserStore extends Store {
       this.amount = amount;
 
       return accessToken;
-    } catch (e) {
+    } catch (error) {
+      this.loginError = error.response.data.errorMessage;
+      this.publish();
+      return '';
+    }
+  }
+
+  async register({
+    name, userName, password, confirmPassword,
+  }) {
+    try {
+      const registeredName = await apiService.register({
+        name, userName, password, confirmPassword,
+      });
+
+      return registeredName;
+    } catch (error) {
+      this.signUpErrors = error.response.data.errorCodesAndMessages;
+      this.publish();
       return '';
     }
   }

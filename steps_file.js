@@ -9,11 +9,15 @@ module.exports = () => actor({
     this.amOnPage(`${backdoorBaseUrl}/setup-user`);
   },
 
-  login(userName) {
+  setupOrders() {
+    this.amOnPage(`${backdoorBaseUrl}/setup-orders`);
+  },
+
+  login(userName, password) {
     this.amOnPage('/login');
 
     this.fillField({ id: 'input-userName' }, userName);
-    this.fillField({ id: 'input-password' }, 'Password1234!');
+    this.fillField({ id: 'input-password' }, password);
 
     this.click('로그인하기');
 

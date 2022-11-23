@@ -6,7 +6,7 @@ const changeReceiver = jest.fn();
 const changeAddress = jest.fn();
 const changeMessage = jest.fn();
 
-jest.mock('../hooks/useOrderStore', () => () => ({
+jest.mock('../hooks/useOrderFormStore', () => () => ({
   changeReceiver,
   changeAddress,
   changeMessage,

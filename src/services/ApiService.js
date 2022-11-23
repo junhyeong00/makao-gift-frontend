@@ -88,6 +88,27 @@ export default class ApiService {
       totalPageCount: data.totalPageCount,
     };
   }
+
+  async fetchOrder(id) {
+    const url = `${baseUrl}/orders/${id}`;
+    const { data } = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${this.accessToken}`,
+      },
+    });
+
+    return data;
+  }
+
+  async register({
+    name, userName, password, confirmPassword,
+  }) {
+    const url = `${baseUrl}/user`;
+    const { data } = await axios.post(url, {
+      name, userName, password, confirmPassword,
+    });
+    return data.name;
+  }
 }
 
 export const apiService = new ApiService();

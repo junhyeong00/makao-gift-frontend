@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useLocalStorage } from 'usehooks-ts';
 
@@ -10,7 +10,8 @@ import useUserStore from '../hooks/useUserStore';
 
 const Container = styled.header`
   display: flex;
-  padding: 1em;
+  padding: 1em 2em;
+  border-bottom: 1px solid rgb(217,217,217);
 
   nav {
     margin-left: .5em;
@@ -25,18 +26,26 @@ const Container = styled.header`
   }
 `;
 
+const H1 = styled.h1`
+  font-size: 1.5em;
+  font-weight: bold;
+`;
+
 export default function Header() {
+  const navigate = useNavigate();
+
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
 
   const userStore = useUserStore();
 
   const handleLogout = () => {
     setAccessToken('');
+    navigate('/');
   };
 
   return (
     <Container>
-      <Link to="/">선물하기</Link>
+      <H1>선물하기</H1>
       <nav>
         <ul>
           <li>

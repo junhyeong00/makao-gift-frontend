@@ -1,10 +1,8 @@
-import { Link } from 'react-router-dom';
-
 import numberFormat from '../utils/numberFormat';
 import Pages from './Pages';
 
 export default function Products({
-  products, totalPageCount, handlePageClick,
+  products, totalPageCount, handlePageClick, handleProductClick,
 }) {
   return (
     <div>
@@ -25,14 +23,17 @@ export default function Products({
         <ul>
           {products.map((product) => (
             <li key={product.id}>
-              <Link to={`/products/${product.id}`}>
+              <button
+                type="button"
+                onClick={() => handleProductClick(product.id)}
+              >
                 <p>{product.maker}</p>
                 <p>{product.name}</p>
                 <p>
                   {numberFormat(product.price)}
                   원
                 </p>
-              </Link>
+              </button>
             </li>
           ))}
         </ul>
