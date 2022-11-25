@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useLocalStorage } from 'usehooks-ts';
 
@@ -11,6 +11,10 @@ import LoginForm from '../components/LoginForm';
 export default function LoginPage() {
   const navigate = useNavigate();
 
+  const location = useLocation();
+
+  const url = location.state;
+
   const [, setAccessToken] = useLocalStorage('accessToken', '');
 
   const userStore = useUserStore();
@@ -22,6 +26,11 @@ export default function LoginPage() {
     const accessToken = await userStore.login({ userName, password });
     if (accessToken) {
       setAccessToken(accessToken);
+
+      if (url) {
+        navigate(url);
+        return;
+      }
       navigate('/');
     }
   };

@@ -25,7 +25,7 @@ export default function OrdersPage() {
     }
 
     if (accessToken) {
-      ordersStore.fetchProducts(currentPage);
+      ordersStore.fetchOrders(currentPage);
     }
   }, []);
 

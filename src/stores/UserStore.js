@@ -44,7 +44,7 @@ export default class UserStore extends Store {
       const registeredName = await apiService.register({
         name, userName, password, confirmPassword,
       });
-
+      this.name = registeredName;
       return registeredName;
     } catch (error) {
       this.signUpErrors = error.response.data.errorCodesAndMessages;

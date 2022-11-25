@@ -1,14 +1,20 @@
 import styled from 'styled-components';
 
 const Container = styled.ul`
-display: flex;
-justify-content: center;
-gap: .4em;
+  margin-bottom: 2em;
+  display: flex;
+  justify-content: center;
+  gap: .4em;
 `;
 
 const PageNumber = styled.button`
-background: none;
-border: none;
+  background: none;
+  border: none;
+  color: #9A9A9A;
+
+  &:focus {
+    color: #000;
+  }
 `;
 
 export default function Pages({

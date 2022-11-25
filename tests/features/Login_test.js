@@ -10,7 +10,6 @@ Before(({ I }) => {
 
 Scenario('로그인 성공', ({ I }) => {
   // When
-  // TODO: fillField 변경
   I.fillField('아이디', 'test123');
   I.fillField('비밀번호', 'Password1234!');
 

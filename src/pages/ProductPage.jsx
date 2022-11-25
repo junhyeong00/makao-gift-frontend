@@ -39,7 +39,9 @@ export default function ProductPage() {
 
   const onClickBuy = () => {
     if (!accessToken) {
-      navigate('/login');
+      navigate('/login', {
+        state: `/products/${productId}`,
+      });
     }
 
     if (amount < totalPrice) {

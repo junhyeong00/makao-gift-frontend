@@ -10,7 +10,7 @@ export default class OrdersStore extends Store {
     this.currentPage = 0;
   }
 
-  async fetchProducts(page) {
+  async fetchOrders(page) {
     const { orders, totalPageCount } = await apiService.fetchOrders(page);
 
     this.orders = orders;

@@ -2,7 +2,7 @@ Feature('회원가입 - 고객은 상품을 주문할 수 있는 자격을 얻�
 
 // Given
 Before(({ I }) => {
-  // I.setupDatabase();
+  I.setupUser();
 
   I.amOnPage('/');
 

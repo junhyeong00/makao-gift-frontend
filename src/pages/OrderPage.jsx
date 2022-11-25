@@ -11,7 +11,11 @@ export default function OrderPage() {
 
   const location = useLocation();
 
-  const { product, selectedCount: purchaseCount, totalPrice: purchasePrice } = location.state;
+  const {
+    product,
+    selectedCount: purchaseCount,
+    totalPrice: purchasePrice,
+  } = location.state;
 
   const orderFormStore = useOrderFormStore();
   const userStore = useUserStore();

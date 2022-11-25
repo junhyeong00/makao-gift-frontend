@@ -19,7 +19,7 @@ Scenario('홈페이지 접속 - (로그인 전)', ({ I }) => {
 Scenario('홈페이지 접속 - (로그인 후)', ({ I }) => {
   // Given
   I.setupUser();
-  I.login('test123');
+  I.login('test123', 'Password1234!');
 
   // When
   I.amOnPage('/');

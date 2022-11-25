@@ -27,6 +27,9 @@ export default class ProductStore extends Store {
   }
 
   reduceCount() {
+    if (this.selectedCount < 2) {
+      return;
+    }
     this.selectedCount -= 1;
     this.totalPrice -= this.product.price;
     this.canBuy = true;
