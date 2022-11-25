@@ -3,23 +3,26 @@ Feature('상품 목록 확인 - 고객은 마음에 드는 상품을 고르기 �
 // Given
 Before(({ I }) => {
   // I.setupDatabase();
-
-  I.amOnPage('/');
 });
 
 Scenario('로그인이 되지 않았을 경우', ({ I }) => {
   // Given
-  // TODO: 아이템 세팅
+  I.setupProducts(10);
+  I.amOnPage('/');
 
   // When
   I.click('스토어');
 
   // Then
   I.see('로그인');
-  I.see('인기선물을 한 자리에 모았아요');
+  I.see('아티산 EDT');
 });
 
 Scenario('아이템이 존재하지 않을 경우', ({ I }) => {
+  // Given
+  I.setupProducts(0);
+  I.amOnPage('/');
+
   // When
   I.click('스토어');
 
@@ -27,27 +30,33 @@ Scenario('아이템이 존재하지 않을 경우', ({ I }) => {
   I.see('상품이 존재하지 않습니다');
 });
 
-Scenario('아이템이 8개 이하로 존재할 경우', ({ I }) => {
+Scenario('아이템이 8개 이하로 존재할 경우(5개)', ({ I }) => {
   // Given
-  // TODO: 아이템 세팅
+  I.setupProducts(5);
+  I.amOnPage('/');
 
   // When
   I.click('스토어');
 
   // Then
-  I.see('인기선물을 한 자리에 모았아요');
-  // TODO: 6개 아이템 확인
+  I.see('아티산 EDT');
+  I.see('존바바토스');
+  I.see('38,000원');
+  I.see('그라펜 타추 퍼퓸');
+  I.see('46,500원');
 });
 
-Scenario('아이템이 8개 이상 존재할 경우', ({ I }) => {
+Scenario('아이템이 8개 이상 존재할 경우(10개) - 2페이지 클릭', ({ I }) => {
   // Given
-  // TODO: 아이템 세팅
+  I.setupProducts(10);
+  I.amOnPage('/');
 
   // When
   I.click('스토어');
+  I.click('2');
 
   // Then
-  I.see('인기선물을 한 자리에 모았아요');
-  // TODO: 8개의 아이템을 확인 -> 가장 최신에 생성된 8개 아이템 읽어오기 (desc created_at)
-  // TODO: 4개의 페이지를 확인
+  I.see('더블유드레스룸');
+  I.see('8,000원');
+  I.see('라이프 퍼퓸백');
 });

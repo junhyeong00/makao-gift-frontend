@@ -20,9 +20,9 @@ module.exports = {
   ],
   rules: {
     indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
+    'linebreak-style': ['error', 'unix'],
     'no-trailing-spaces': 'error',
     curly: 'error',
     'brace-style': 'error',
@@ -42,5 +42,7 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'key-spacing': ['error', { mode: 'strict' }],
     'arrow-spacing': ['error', { before: true, after: true }],
+    'react/prop-types': 'off',
+    'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
   },
 };
